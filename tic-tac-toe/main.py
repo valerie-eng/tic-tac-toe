@@ -17,27 +17,27 @@ def drawBoard(board):
     print('   |   |')
     print(' ' + board[1] + ' | ' + board[2] + ' | ' + board[3])
     print('   |   |')
-
+'''
 def inputPlayerLetter():
     # Lets the player type which letter they want to be.
-    # Returns a list with the player's letter as the first item, and the computer's letter as the second.
+    # Returns a list with player 1's letter as the first item, and player 2's letter as the second.
     letter = ''
     while not (letter == 'X' or letter == 'O'):
         print('Do you want to be X or O?')
         letter = input().upper()
 
-    # the first element in the tuple is the player's letter, the second is the computer's letter.
+    # the first element in the tuple is the player 1's letter, the second is the player 2's letter.
     if letter == 'X':
         return ['X', 'O']
     else:
         return ['O', 'X']
-
+'''
 def whoGoesFirst():
     # Randomly choose the player who goes first.
     if random.randint(0, 1) == 0:
-        return 'computer'
+        return 'player 1'
     else:
-        return 'player'
+        return 'player 2'
 
 def playAgain():
     # This function returns True if the player wants to play again, otherwise it returns False.
@@ -76,10 +76,10 @@ def getPlayerMove(board):
     # Let the player type in his move.
     move = ' '
     while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
-        print('What is your next move? (1-9)')
+        print(turn + ', what is your next move? (1-9)')
         move = input()
     return int(move)
-
+'''
 def chooseRandomMoveFromList(board, movesList):
     # Returns a valid move from the passed list on the passed board.
     # Returns None if there is no valid move.
@@ -128,7 +128,7 @@ def getComputerMove(board, computerLetter):
 
     # Move on one of the sides.
     return chooseRandomMoveFromList(board, [2, 4, 6, 8])
-
+'''
 def isBoardFull(board):
     # Return True if every space on the board has been taken. Otherwise return False.
     for i in range(1, 10):
@@ -142,21 +142,21 @@ print('Welcome to Tic Tac Toe!')
 while True:
     # Reset the board
     theBoard = [' '] * 10
-    playerLetter, computerLetter = inputPlayerLetter()
+    # playerLetter, computerLetter = inputPlayerLetter()
     turn = whoGoesFirst()
     print('The ' + turn + ' will go first.')
     gameIsPlaying = True
 
     while gameIsPlaying:
-        if turn == 'player':
-            # Player's turn.
+        if turn == 'player 1':
+            # Player 1's turn.
             drawBoard(theBoard)
             move = getPlayerMove(theBoard)
-            makeMove(theBoard, playerLetter, move)
+            makeMove(theBoard, 'X', move)
 
-            if isWinner(theBoard, playerLetter):
+            if isWinner(theBoard, 'X'):
                 drawBoard(theBoard)
-                print('Hooray! You have won the game!')
+                print('Hooray! Player 1 has won the game!')
                 gameIsPlaying = False
             else:
                 if isBoardFull(theBoard):
@@ -164,16 +164,17 @@ while True:
                     print('The game is a tie!')
                     break
                 else:
-                    turn = 'computer'
+                    turn = 'player 2'
 
         else:
-            # Computer's turn.
-            move = getComputerMove(theBoard, computerLetter)
-            makeMove(theBoard, computerLetter, move)
+            # Player 2's turn.
+            drawBoard(theBoard)
+            move = getPlayerMove(theBoard)
+            makeMove(theBoard, 'O', move)
 
-            if isWinner(theBoard, computerLetter):
+            if isWinner(theBoard, 'O'):
                 drawBoard(theBoard)
-                print('The computer has beaten you! You lose.')
+                print('Hooray! Player 2 has won the game!')
                 gameIsPlaying = False
             else:
                 if isBoardFull(theBoard):
@@ -181,7 +182,6 @@ while True:
                     print('The game is a tie!')
                     break
                 else:
-                    turn = 'player'
-
+                    turn = 'player 1'
     if not playAgain():
         break
