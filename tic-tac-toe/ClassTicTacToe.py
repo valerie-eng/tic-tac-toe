@@ -13,8 +13,7 @@ class TicTacToe:
 -----------
    |   |
  7 | 8 | 9
-   |   |
-        ''')
+   |   |''')
     def display (self):
         print('   |   |')
         print(' ' + self.board[0] + ' | ' + self.board[1] + ' | ' + self.board[2])
@@ -84,12 +83,10 @@ class TicTacToe:
                     return False
         print("Its a tie!")
         return True
-
-
 def playGame ():
-    ttt = TicTacToe()
     print("Welcome to Tic Tac Toe!")
     while True:
+        ttt = TicTacToe()
         player = ttt.chooseFirstPlayer()
         print("Player " + player + " will go first.")
         while True:
@@ -108,9 +105,5 @@ def playGame ():
             yn = input()
         if yn == 'n':
             break
-
-    print("Goodbye!")
-
-
-
+print("Goodbye!")
 playGame()
