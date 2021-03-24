@@ -1,5 +1,6 @@
 import random
 class TicTacToe:
+    
     def __init__ (self):
         self.board = ['1','2','3','4','5','6','7','8','9']
         print('''
@@ -14,6 +15,7 @@ class TicTacToe:
    |   |
  7 | 8 | 9
    |   |''')
+    
     def display (self):
         print('   |   |')
         print(' ' + self.board[0] + ' | ' + self.board[1] + ' | ' + self.board[2])
@@ -26,16 +28,18 @@ class TicTacToe:
         print('   |   |')
         print(' ' + self.board[6] + ' | ' + self.board[7] + ' | ' + self.board[8])
         print('   |   |')
+    
     def chooseFirstPlayer(self):
         n = random.randint(0,1)
         if n:
             return '1'
         return '2'
+    
     def getMove (self,player):
         if player == '1':
-            print("Player 1, Take a move(1-9):")
+            print("Player 1, make a move (1-9):")
             move = str(input())
-            while ((move != '1') and (move != '2') and (move != '3') and (move != '4') and (move != '5') and (move != '6') and (move != '7') and (move != '8') and (move != '9')):
+            while move not in '123456789':                
                 print("Invalid move. Please try again.") 
                 move = (input())
             move = int(move)
@@ -45,9 +49,9 @@ class TicTacToe:
                 move = int(move)
             self.board[move-1] = 'X'
         else:
-            print("Player 2, Take a move(1-9):")
+            print("Player 2, make a move (1-9):")
             move = str(input())
-            while ((move != '1') and (move != '2') and (move != '3') and (move != '4') and (move != '5') and (move != '6') and (move != '7') and (move != '8') and (move != '9')):
+            while move not in '123456789':
                 print("Invalid move. Please try again.") 
                 move = (input())
             move = int(move)
@@ -56,6 +60,7 @@ class TicTacToe:
                 move = (input())
                 move = int(move)
             self.board[move-1] = 'O'
+    
     def winner (self,player):
         if player == '1':
             ox = 'X'
@@ -70,6 +75,7 @@ class TicTacToe:
         (self.board[2] == ox and self.board[5] == ox and self.board[8] == ox) or # down the right side
         (self.board[2] == ox and self.board[4] == ox and self.board[6] == ox) or # diagonal
         (self.board[0] == ox and self.board[4] == ox and self.board[8] == ox))   # diagonal
+    
     def endGame (self):
         if self.winner('1'):
             print("Player 1 Wins!")
@@ -83,6 +89,7 @@ class TicTacToe:
                     return False
         print("Its a tie!")
         return True
+
 def playGame ():
     print("Welcome to Tic Tac Toe!")
     while True:
@@ -98,10 +105,10 @@ def playGame ():
                 player = '2'
             else:
                 player = '1'
-        print("Would you like to play again?(y/n)")
+        print("Would you like to play again? (y/n)")
         yn = input()
         while yn != 'y' and yn != 'n':
-            print("Invalid answer. Make sure your answer is y or n. Would you like to play again?(y/n)")
+            print("Invalid answer. Make sure your answer is y or n. Would you like to play again? (y/n)")
             yn = input()
         if yn == 'n':
             break
